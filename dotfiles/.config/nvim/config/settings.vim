@@ -1,4 +1,10 @@
 " INDENT
+set complete+=k         " enable dictionary completion
+set dictionary+=/usr/share/dict/words
+
+set completeopt=menuone
+set cmdheight=2
+
 set autoindent    " copy indent from current line when starting a new line
 set smartindent   " do smart autoindenting
 set shiftwidth=4  " Number of spaces to use for each step of (auto)indent.
