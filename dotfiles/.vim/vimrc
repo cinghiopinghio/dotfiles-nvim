@@ -43,8 +43,8 @@ let g:ale_linters = {
 " Plug 'rhysd/vim-grammarous'
 " Plug 'vigoux/LanguageTool.nvim'
 " let g:languagetool_server_jar='/usr/share/java/languagetool/languagetool-server.jar'
-Plug 'reedes/vim-wordy'
-Plug 'davidbeckingsale/writegood.vim'
+" Plug 'reedes/vim-wordy'
+" Plug 'davidbeckingsale/writegood.vim'
 " }}}
 
 " Completion
@@ -57,27 +57,31 @@ Plug 'autozimu/LanguageClient-neovim', {
 let g:LanguageClient_serverCommands = {
             \ 'rust': ['rls'],
             \ 'javascript': ['javascript-typescript-stdio'],
-            \ 'python': ['jedi-language-server'],
+            \ 'python': ['anakinls'],
             \ 'lua': ['lua-language-server'],
             \ 'latex': ['texlab'],
             \ 'vim': ['vim-language-server'],
             \ 'sh': ['bash-language-server'],
             \ }
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_signatureHelp()<CR>
+nnoremap <silent> K <Plug>(lcn-hover)
+nnoremap <silent> gd <Plug>(lcn-definition)
+nnoremap <silent> <F2> <Plug>(lcn-rename)
 
 " Plug 'Shougo/echodoc.vim'
 " let g:echodoc#enable_at_startup = 1
 " let g:echodoc#type = 'floating'
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'Shougo/deoplete.nvim'
 " Plug 'deoplete-plugins/deoplete-jedi'
 " Plug 'paretje/deoplete-notmuch', {'for': 'mail'}
 let g:deoplete#enable_at_startup = 1
 
-" }}}
 
+" }}}
+" Plug 'r
 " Snippets
 " {{{
 " Track the engine.
@@ -88,59 +92,59 @@ Plug 'honza/vim-snippets'
 let g:UltiSnipsExpandTrigger = "<c-k>"        " Do not use <tab>
 let g:UltiSnipsJumpForwardTrigger = "<c-k>"  " Do not use <c-j>
 " }}}
-
+" Plug 'r
 "  complete parenthesis
 Plug 'jiangmiao/auto-pairs'
 let g:AutoPairs= {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
 
 "  word editing (ctrl-A)
 "  {{{
-Plug 'bootleq/vim-cycle'
-let g:cycle_no_mappings = 1    " just set my keys
-let g:cycle_max_conflict = 1   " do not handle conflicts (better performance)
-nmap <silent> <C-A> <Plug>CycleNext
-nmap <silent> <C-X> <Plug>CyclePrev
-noremap <silent> <Plug>CycleFallbackNext <C-A>
-noremap <silent> <Plug>CycleFallbackPrev <C-X>
-let g:cycle_default_groups = [
-            \   [['true', 'false']],
-            \   [['yes', 'no']],
-            \   [['on', 'off']],
-            \   [['+', '-']],
-            \   [['>', '<']],
-            \   [['"', "'"]],
-            \   [['==', '!=']],
-            \   [['and', 'or']],
-            \   [["in", "out"]],
-            \   [["up", "down"]],
-            \   [["min", "max"]],
-            \   [["get", "set"]],
-            \   [["add", "remove"]],
-            \   [["to", "from"]],
-            \   [["read", "write"]],
-            \   [['without', 'with']],
-            \   [["exclude", "include"]],
-            \   [['{:}', '[:]', '(:)'], 'sub_pairs'],
-            \   [['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday',
-            \     'Friday', 'Saturday'], 'hard_case', {'name': 'Days'}],
-            \ ]
-let g:cycle_default_groups_for_tex = [
-            \   [['tiny', 'scriptsize', 'footnotesize', 'small', 'normalsize', 'large', 'Large', 'LARGE', 'huge', 'Huge'], 'hard_case', 'match_case'],
-            \   [['displaystyle', 'scriptstyle', 'scriptscriptstyle', 'textstyle']],
-            \   [['part', 'chapter', 'section', 'subsection', 'subsubsection', 'paragraph', 'subparagraph']],
-            \   [['article', 'report', 'book', 'letter', 'slides']],
-            \   [['scrbook', 'scrreprt', 'scrartcl', 'scrlttr2']],
-            \   [['oneside', 'twoside']],
-            \   [['onecolumn', 'twocolumn']],
-            \   [['draft', 'final']],
-            \   [['\big(:\big)', '\Big(:\Big)', '\bigg(:\bigg)', '\Bigg(:\Bigg)'], 'sub_pairs', 'hard_case', 'match_case'],
-            \   [['\big[:\big]', '\Big[:\Big]', '\bigg[:\bigg]', '\Bigg[:\Bigg]'], 'sub_pairs', 'hard_case', 'match_case'],
-            \   [['\big\{:\big\}', '\Big\{:\Big\}', '\bigg\{:\bigg\}', '\Bigg\{:\Bigg\}'], 'sub_pairs', 'hard_case', 'match_case'],
-            \   [['\big\l:\big\r', '\Big\l:\Big\r', '\bigg\l:\bigg\r', '\Bigg\l:\Bigg\r'], 'sub_pairs', 'hard_case', 'match_case'],
-            \   [['\big', '\Big', '\bigg', '\Bigg'], 'hard_case', 'match_case'],
-            \ ]
+" Plug 'bootleq/vim-cycle'
+" let g:cycle_no_mappings = 1    " just set my keys
+" let g:cycle_max_conflict = 1   " do not handle conflicts (better performance)
+" nmap <silent> <C-A> <Plug>CycleNext
+" nmap <silent> <C-X> <Plug>CyclePrev
+" noremap <silent> <Plug>CycleFallbackNext <C-A>
+" noremap <silent> <Plug>CycleFallbackPrev <C-X>
+" let g:cycle_default_groups = [
+"             \   [['true', 'false']],
+"             \   [['yes', 'no']],
+"             \   [['on', 'off']],
+"             \   [['+', '-']],
+"             \   [['>', '<']],
+"             \   [['"', "'"]],
+"             \   [['==', '!=']],
+"             \   [['and', 'or']],
+"             \   [["in", "out"]],
+"             \   [["up", "down"]],
+"             \   [["min", "max"]],
+"             \   [["get", "set"]],
+"             \   [["add", "remove"]],
+"             \   [["to", "from"]],
+"             \   [["read", "write"]],
+"             \   [['without', 'with']],
+"             \   [["exclude", "include"]],
+"             \   [['{:}', '[:]', '(:)'], 'sub_pairs'],
+"             \   [['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday',
+"             \     'Friday', 'Saturday'], 'hard_case', {'name': 'Days'}],
+"             \ ]
+" let g:cycle_default_groups_for_tex = [
+"             \   [['tiny', 'scriptsize', 'footnotesize', 'small', 'normalsize', 'large', 'Large', 'LARGE', 'huge', 'Huge'], 'hard_case', 'match_case'],
+"             \   [['displaystyle', 'scriptstyle', 'scriptscriptstyle', 'textstyle']],
+"             \   [['part', 'chapter', 'section', 'subsection', 'subsubsection', 'paragraph', 'subparagraph']],
+"             \   [['article', 'report', 'book', 'letter', 'slides']],
+"             \   [['scrbook', 'scrreprt', 'scrartcl', 'scrlttr2']],
+"             \   [['oneside', 'twoside']],
+"             \   [['onecolumn', 'twocolumn']],
+"             \   [['draft', 'final']],
+"             \   [['\big(:\big)', '\Big(:\Big)', '\bigg(:\bigg)', '\Bigg(:\Bigg)'], 'sub_pairs', 'hard_case', 'match_case'],
+"             \   [['\big[:\big]', '\Big[:\Big]', '\bigg[:\bigg]', '\Bigg[:\Bigg]'], 'sub_pairs', 'hard_case', 'match_case'],
+"             \   [['\big\{:\big\}', '\Big\{:\Big\}', '\bigg\{:\bigg\}', '\Bigg\{:\Bigg\}'], 'sub_pairs', 'hard_case', 'match_case'],
+"             \   [['\big\l:\big\r', '\Big\l:\Big\r', '\bigg\l:\bigg\r', '\Bigg\l:\Bigg\r'], 'sub_pairs', 'hard_case', 'match_case'],
+"             \   [['\big', '\Big', '\bigg', '\Bigg'], 'hard_case', 'match_case'],
+"             \ ]
 "  }}}
-
+" Plug 'r
 " navigate tags
 " Plug 'majutsushi/tagbar'
 " nmap <F8> :TagbarToggle<CR>
@@ -155,7 +159,7 @@ if has('terminal') || has('nvim')
     " exit from terminal mode
     tnoremap <Esc> <C-\><C-n>
 endif
-
+" Plug 'r
 " keep folds as is until save of fold/unfold (save time)
 Plug 'Konfekt/FastFold'
 " " window splits control
@@ -163,8 +167,6 @@ Plug 'Konfekt/FastFold'
 Plug 'romainl/vim-cool'
 " find and replace with s {substitute, search}
 Plug 'hauleth/sad.vim'
-" highlight coursos on jumps
-Plug 'DanilaMihailov/beacon.nvim'
 " A vim plugin to display the indention levels with thin vertical lines
 if v:version > 800
     Plug 'Yggdroot/indentLine'
@@ -341,7 +343,10 @@ Plug 'ferrine/md-img-paste.vim'
 call plug#end()
 "}}}
 
-call deoplete#custom#option('smart_case', v:true)
+call deoplete#custom#option({
+            \ 'smart_case': v:true,
+            \ 'refresh_backspace': v:false
+            \ })
 "----------------------------------------------------------------------
 set autoindent    " always set autoindenting on
 set smartindent
