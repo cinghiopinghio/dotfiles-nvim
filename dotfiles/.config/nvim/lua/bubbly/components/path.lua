@@ -47,8 +47,8 @@ return function(inactive)
     },
     inactive or {
       data = vim.bo.mod and settings.symbol.modified,
-      color = settings.color.modified,
-      style = settings.style.modified,
+      color = inactive and settings.inactive_color or settings.color.modified,
+      style = inactive and settings.inactive_style or settings.style.modified,
     },
   }
 end

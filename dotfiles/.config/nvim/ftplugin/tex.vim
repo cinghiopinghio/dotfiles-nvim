@@ -9,29 +9,8 @@ inoremap <expr> <c-x><c-a> fzf#vim#complete(fzf#wrap({
             \ 'reducer': { lines -> system("bibtex-cite -prefix='' -postfix='' -separator=', ' ", lines) }},
             \ ))
 
-nnoremap <localleader>lc "zyiw:exe "FloatermSend bibtool -X ".@z." -x ".expand('%:r').".aux"<CR>
-
-"{{{  VimCompletesMe
-let b:vcm_tab_complete='omni'
-"}}}
-
-"{{{ Deoplete
-if exists('g:deoplete#enable_at_startup')
-	call deoplete#custom#var('omni',
-				\'input_patterns',
-				\{
-				\'tex': g:vimtex#re#deoplete
-				\})
-endif
-"}}}
-
 "{{{ auto-pairs
 let b:AutoPairs={'(':')','[':']','{':'}',"'":"'",'"':'"','$':'$'}
-"}}}
-
-"{{{ delimitMate
-let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
-let b:delimitMate_quotes = "\" ' $"
 "}}}
 
 "{{{ VIMTEX
@@ -40,19 +19,29 @@ let g:vimtex_view_method='zathura'
 if has('nvim')
         let g:vimtex_compiler_progname='nvr'
 endif
+
 let g:vimtex_fold_enabled=1
 let g:vimtex_fold_manual=0
 let g:vimtex_view_forward_search_on_start = 1
+
+" nnoremap <localleader>lv :call system("zathura " . expand("%:r") . ".pdf &")<cr>
+
 " cleanup on quit
-augroup vimtex_event_1
+augroup texmk
         au!
-        au User VimtexEventQuit call vimtex#compiler#clean(0)
+        if exists("*vimtex#compiler#clean")
+            au User VimtexEventQuit call vimtex#compiler#clean(0)
+        else
+            au VimLeave *.tex execute "!latexmk -c"
+        endif
 augroup END
 
+if exists("*vimtex#complete#omnifunc")
+    set omnifunc=vimtex#complete#omnifunc
+endif
 
-set omnifunc=vimtex#complete#omnifunc
 let g:vimtex_quickfix_mode=2
-" let g:vimtex_quickfix_method = 'pplatex'
+let g:vimtex_complete_enabled = 1
 let g:vimtex_quickfix_ignore_filters = [
       \ 'Marginpar on page',
       \ 'A float is stuck',
@@ -74,13 +63,3 @@ let g:vimtex_compiler_latexmk = {
         \}
 
 let g:vimtex_compiler_latexmk_engines = { '_': '-pdf' }
-
-"}}}
-"
-
-" let g:neoformat_tex_latexindent = {
-"         \ 'exe': 'latexindent',
-"         \ 'args': [],
-"         \ 'stdin': 0,
-"         \ 'replace': 1
-"         \ }

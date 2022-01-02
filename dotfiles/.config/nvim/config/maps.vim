@@ -15,6 +15,14 @@ nnoremap <c-t> :tabnew<cr>
 nmap <silent> <Down> gj
 nmap <silent> <Up> gk
 
+" Move block of codes up and down
+" Move up
+vmap <S-k>    :'<,'> move .-2<cr>gv
+vmap <S-up>   :'<,'> move .-2<cr>gv
+" Move down
+vmap <S-j>    :'<,'> move '>+1<cr>gv
+vmap <S-down> :'<,'> move '>+1<cr>gv
+
 " Use tab and shift-tab to cycle through windows.
 nnoremap <Tab> <C-W>w
 nnoremap <S-Tab> <C-W>W
@@ -45,3 +53,11 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
 
 " exit from terminal mode
 tnoremap <Esc> <C-\><C-n>
+
+" move lines and blocks up (Alt-k) and down (Alt-j)
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv

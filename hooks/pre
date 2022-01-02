@@ -3,13 +3,14 @@
 echo -e "\nInstalling [Neo]Vim dotfiles.\n"
 
 # initialize paq
-PAQPATH="${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/pack/paqs/opt"
-mkdir -p "${PAQPATH}"
+PACKPATH="${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/pack/packer/start"
+mkdir -p "${PACKPATH}"
 
-if [ -d "${PAQPATH}/paq-nvim" ]
+if [ -d "${PACKPATH}/packer.nvim" ]
 then
     echo Paq-nvim already exists
 else
     echo cloning...
-    git clone https://github.com/savq/paq-nvim.git "${PAQPATH}/paq-nvim"
+    # git clone https://github.com/savq/paq-nvim.git "${PACKPATH}/paq-nvim"
+    git clone "https://github.com/wbthomason/packer.nvim" "${PACKPATH}/packer.nvim"
 fi

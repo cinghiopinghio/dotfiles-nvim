@@ -20,7 +20,7 @@ local process_filter = require'bubbly.utils.module'.process_filter
 
 -- Returns bubble that shows built-in lsp diagnostics
 ---@param inactive boolean
----@return Segment[]
+---@return table
 return function(inactive)
   if inactive then return nil end
   if not process_filter(settings.filter) then return nil end

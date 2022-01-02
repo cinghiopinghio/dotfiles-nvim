@@ -3,21 +3,21 @@
 "----------------------------------------------------------------------
 " PREABLE
 let maplocalleader=' '
-filetype indent plugin on
-syntax on
-
-"----------------------------------------------------------------------
-" Plugin Manager
-" source ${HOME}/.config/nvim/config/plugins.vim
 
 "-------------------------------------------------------------------------
 " SET OPTIONS
+
 source ${HOME}/.config/nvim/config/settings.vim
+
+"-------------------------------------------------------------------------
+" MANAGE PLUGINS
+lua require('plugins')
+" source ${HOME}/.config/nvim/config/plugins.vim
+autocmd BufWritePost init.lua PackerCompile
 
 "-------------------------------------------------------------------------
 " MAP
 source ${HOME}/.config/nvim/config/maps.vim
-
 source ${HOME}/.config/nvim/config/fzf.vim
 
 set termguicolors
@@ -25,5 +25,7 @@ lua require('init')
 
 command! Top call simplerun#toggle("top")
 nnoremap <F7> :call simplerun#toggle()<CR>
-
-command! PlugUp lua require 'plugins'
+let g:simplerun_commands = {
+            \ 'tex': 'latexmk -pvc -pdf -interaction=nonstopmode',
+            \ 'lua': 'lua5.2'
+            \ }

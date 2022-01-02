@@ -1,6 +1,6 @@
 " vimrc file.
 
-let s:default_fontsize = 11
+let s:default_fontsize = 12
 let s:fontsize = s:default_fontsize
 " let s:font = "Hack"
 " let s:font = "Source Code Pro"
@@ -21,7 +21,6 @@ function! SetFont() abort
                 exec "set guifont=" . s:font . ":h" . (s:fontsize + 4)
 	else
 		exec "GuiFont! " . s:font . ":h" . s:fontsize
-
 		GuiLinespace 0
 	endif
 endfunction

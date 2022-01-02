@@ -1,0 +1,88 @@
+snippet templ-minimal "Template: Minimal"
+	\documentclass{minimal}
+	\begin{document}
+
+	Hello World!${0}
+
+	\end{document}
+
+snippet templ-article "Template: standard article" b
+	\documentclass{article}
+	\usepackage[utf8]{inputenc}
+	\usepackage{graphicx}
+	${1}
+	\title{The title}
+	\author{Pinco Pallino}
+
+	\begin{document}
+	\maketitle
+
+	${0}
+
+	\end{document}
+
+snippet templ-tikz "Template: standalone Tikz figure" b
+	% TEX program = lualatex
+	\RequirePackage{luatex85}
+	\documentclass[border=5]{standalone}
+
+	\usepackage{fontspec}
+	\setmainfont{Fira Sans}
+
+	\usepackage{tikz}
+	\usetikzlibrary{arrows}
+	\usetikzlibrary{positioning}
+	\usetikzlibrary{calc}
+	% \usetikzlibrary{shadows,fadings,matrix}
+	% use arrows with bended tips
+	% \usetikzlibrary{arrows.meta,bending}
+	% use rectangles to fit other nodes
+	% \usetikzlibrary{backgrounds,fit}
+
+	\begin{document}
+
+	\begin{tikzpicture}
+	  [
+	  thick
+	  ]
+	${0}
+	\end{tikzpicture}
+
+	\end{document}
+
+
+snippet templ-slides "Template: beamer slides" b
+	\documentclass{beamer}
+	\usepackage[english]{babel}
+	\usepackage{graphicx}
+
+	\usepackage{tikz}
+	\usetikzlibrary{calc, matrix, positioning}
+
+	\usepackage{amsmath,amsthm, amssymb, latexsym}
+	\boldmath%
+
+	\usepackage{pgfplots}
+	\usepgfplotslibrary{dateplot}
+
+	\usetheme[%progressbar=frametitle,
+		  sectionpage=none,
+		  background=light,
+		  block=fill]{metropolis}
+
+	\title{${0}}
+	\author[]{${1}}
+	\institute{${2}}
+	\date{${3}}
+	\titlegraphic{%
+	  \tikz[remember picture, overlay]\node[opacity=.2, anchor=center] at (current
+	  page.center){\includegraphics[width=1.2\textwidth]{${4}}};
+	}
+
+	\begin{document}
+
+	\begin{frame}[plain] %Title
+	  \maketitle
+	\end{frame}
+
+	\end{document}
