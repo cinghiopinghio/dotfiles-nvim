@@ -180,6 +180,7 @@ function <sid>StripTrailingSpaces()
 endfunction
 autocmd BufWritePre * :call <sid>StripTrailingSpaces()
 
+autocmd BufWritePost * normal zx
 
 " augroup folds
 "   " Don't screw up folds when inserting text that might affect them, until
