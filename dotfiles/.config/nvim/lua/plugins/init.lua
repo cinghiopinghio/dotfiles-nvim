@@ -267,6 +267,19 @@ return packer.startup({
             disable = true,
         })
 
+        use({
+            "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+            disable = true,
+            config = function()
+                require("lsp_lines").register_lsp_virtual_lines()
+                -- Disable virtual_text since it's redundant due to lsp_lines.
+                vim.diagnostic.config({
+                    virtual_text = false,
+                    virtual_lines = true,
+                })
+            end,
+        })
+
         --------------------
         -- Completion
         --------------------
