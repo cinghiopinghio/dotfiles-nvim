@@ -208,6 +208,7 @@ return packer.startup({
             config = function()
                 vim.g.lion_squeeze_spaces = 1
             end,
+            keys = { { "v", "gl" } },
         })
         -- use ({"AndrewRadev/sideways.vim"}) -- switch position of arguments
         -- now using treesitter
