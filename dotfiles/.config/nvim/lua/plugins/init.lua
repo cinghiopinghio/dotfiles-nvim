@@ -50,6 +50,9 @@ return packer.startup({
                 vim.g.indent_blankline_filetype_exclude = { "tex", "markdown", "help", "no ft" }
                 vim.g.indent_blankline_buftype_exclude = { "terminal" }
                 vim.g.indent_blankline_char = "▏"
+                vim.g.indent_blankline_show_current_context = true
+                vim.g.indent_blankline_show_current_context_start = false
+                vim.g.indent_blankline_show_current_context_start_on_current_line = false
                 vim.g.indent_blankline_context_char = "▍"
                 vim.g.indent_blankline_use_treesitter = true
                 vim.g.indent_blankline_show_trailing_blankline_indent = true
