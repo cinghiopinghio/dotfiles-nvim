@@ -34,7 +34,6 @@ return packer.startup({
         use("tpope/vim-commentary") -- comment uncomment with gcc
         use("tpope/vim-speeddating") -- increase/decrease dates with c-a c-x
         use("tpope/vim-surround") -- quoting/parenthesis mae easy
-        -- use("tpope/vim-sleuth") -- adjust indentation by looking into the same file
 
         --------------------
         -- Visual
@@ -43,7 +42,7 @@ return packer.startup({
             "romainl/vim-cool", -- plugin to remove search highlight once the cursor moved
             disable = false,
         })
-        use("DanilaMihailov/beacon.nvim") -- highlight coursor on jumps
+        use({ "DanilaMihailov/beacon.nvim" }) -- highlight coursor on jumps
         use({
             "lukas-reineke/indent-blankline.nvim", -- show indentation guidelines
             disable = false,
@@ -66,14 +65,6 @@ return packer.startup({
             "nvim-lualine/lualine.nvim",
             config = load_conf("lualine"),
         })
-        use({
-            "luukvbaal/stabilize.nvim",
-            disable = true,
-            config = function()
-                require("stabilize").setup()
-            end,
-        })
-        -- use({ "kaile256/vim-foldpeek" })
         use({
             "HiPhish/desktop-notify-nvim",
             config = function()
@@ -153,6 +144,10 @@ return packer.startup({
             "jiangmiao/auto-pairs", --  complete parenthesis
         })
         use({
+            "junegunn/fzf", -- fuzzy search
+            run = ":call fzf#install()",
+        })
+        use({
             "voldikss/vim-floaterm",
             config = function()
                 vim.g.floaterm_keymap_toggle = "<F12>"
@@ -188,12 +183,13 @@ return packer.startup({
                 }
                 vim.api.nvim_set_keymap("n", "<f11>", "<cmd>:Floaterms<cr>", { noremap = true, silent = true })
             end,
+            requires = {
+                {
+                    "junegunn/fzf",
+                    run = ":call fzf#install()",
+                },
+            },
         })
-        use({
-            "junegunn/fzf",
-            run = "./install --all",
-        })
-        use("junegunn/fzf.vim")
         use({
             "ibhagwan/fzf-lua",
             config = load_conf("fzflua"),
@@ -213,7 +209,8 @@ return packer.startup({
                 vim.g.lion_squeeze_spaces = 1
             end,
         })
-        -- use 'AndrewRadev/sideways.vim' -- switch position of arguments
+        -- use ({"AndrewRadev/sideways.vim"}) -- switch position of arguments
+        -- now using treesitter
         use({
             "FooSoft/vim-argwrap", -- A plugin to expand args brtween parenthesis
             config = function()
